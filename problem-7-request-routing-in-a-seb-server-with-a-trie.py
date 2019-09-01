@@ -47,6 +47,9 @@ class Router:
         self.route = RouteTrie(root_handler)
          
     def add_handler(self, path, handler):
+        if path == "" or handler == "":
+            print("Warning: path or handler cannot be empty")
+            return
     # Add a handler for a path
     # You will need to split the path and pass the pass parts
     # as a list to the RouteTrie
@@ -89,3 +92,11 @@ print('-'*50)
 router = Router()
 router.add_handler("/home/bbc/uk/local/news", "news")  # add a route
 print(router.lookup("/")) # should print 'root handler'
+print(router.lookup("/home")) # should print 'root handler'
+print(router.lookup("/home/about/me")) # should print 'root handler'
+print(router.lookup("/home/bbc/uk/local/news")) # should print 'root handler'
+#############TEST-3
+router = Router()
+router.add_handler("", "nothing")
+router.add_handler("/home", "")
+
